@@ -1,7 +1,9 @@
 package org.example.contractor;
+
 import org.example.startWindow.StartWindow;
 import org.example.startWindow.StartWindowButtonListener;
-import org.example.windowIcon.WindowIconSetter;
+import org.example.appConfig.WindowIconSetter;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -24,10 +26,12 @@ public class Contractor extends JFrame {
     public static JTextField newItemEmailField;
     public static JTextField newItemPhoneNumberField;
     public static JTable contractorTable;
+
     public static void sortContractorTableByCode() {
 
         DefaultTableModel model = (DefaultTableModel) contractorTable.getModel();
         int rowCount = model.getRowCount();
+
 
         List<Vector<Object>> data = new ArrayList<>();
         for (int i = 0; i < rowCount; i++) {
@@ -50,11 +54,18 @@ public class Contractor extends JFrame {
             model.addRow(row);
         }
     }
-    public Contractor() throws IOException {
 
-        setTitle("Kontrahenci");
-        setSize(700, 800);
-        WindowIconSetter.setWindowIcon(this,"src/main/resources/dfsc syst.png");
+
+    public Contractor() throws IOException {
+        super("Kontrahenci");
+        int widthScreen = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int heightScreen = Toolkit.getDefaultToolkit().getScreenSize().height;
+        int frameWidth = (widthScreen / 2);
+        int frameHeight = (heightScreen / 2);
+        this.setSize(frameWidth, frameHeight);
+        setLocationRelativeTo(null);
+
+        WindowIconSetter.setWindowIcon(this, "src/main/resources/dfsc syst.png");
         String[] columnNames = {"Id", "Nazwa firmy", "NIP", "REGON", "Adres", "Email", "Nr telefonu"};
         TableModel model = new DefaultTableModel(columnNames, 0);
 
@@ -63,7 +74,7 @@ public class Contractor extends JFrame {
         contractorTable.getTableHeader().setReorderingAllowed(false);
 
         ContractorsMethod.loadContractorsFromFile();
-       sortContractorTableByCode();
+        sortContractorTableByCode();
 
         JScrollPane scrollPane = new JScrollPane(contractorTable);
         JPanel tablePanel = new JPanel(new BorderLayout());
@@ -71,13 +82,13 @@ public class Contractor extends JFrame {
         add(tablePanel, BorderLayout.CENTER);
 
 
-       newItemCompanyIdField = new JTextField();
-       newItemCompanyNameField = new JTextField();
-       newItemNipField = new JTextField();
-       newItemRegonField = new JTextField();
-       newItemAddressField = new JTextField();
-       newItemEmailField = new JTextField();
-       newItemPhoneNumberField = new JTextField();
+        newItemCompanyIdField = new JTextField();
+        newItemCompanyNameField = new JTextField();
+        newItemNipField = new JTextField();
+        newItemRegonField = new JTextField();
+        newItemAddressField = new JTextField();
+        newItemEmailField = new JTextField();
+        newItemPhoneNumberField = new JTextField();
 
         JButton addButton = new JButton("Dodaj");
         JButton editButton = new JButton("Edytuj");
@@ -112,19 +123,20 @@ public class Contractor extends JFrame {
         add(mainPanel, BorderLayout.SOUTH);
 
         addWindowListener(new WindowAdapter() {
-        @Override
-        public void windowClosing(WindowEvent e) {
-        StartWindowButtonListener buttonListener = new StartWindowButtonListener();
-        StartWindow startWindow = new StartWindow(buttonListener);
-        startWindow.setVisible(true);
-        dispose();
-                              }
+         @Override
+          public void windowClosing(WindowEvent e) {
+             StartWindowButtonListener buttonListener = new StartWindowButtonListener();
+             StartWindow startWindow = new StartWindow(buttonListener);
+             startWindow.setVisible(true);
+             dispose();
+          }
+        });
 
-                          }
-        );
-        ContractorButtonListener contractortButtonListener = new ContractorButtonListener();
-        addButton.addActionListener(contractortButtonListener);
-        editButton.addActionListener(contractortButtonListener);
-        deleteButton.addActionListener(contractortButtonListener);
+        ContractorButtonListener contractorButtonListener = new ContractorButtonListener();
+        addButton.addActionListener(contractorButtonListener);
+        editButton.addActionListener(contractorButtonListener);
+        deleteButton.addActionListener(contractorButtonListener);
     }
+
+
 }

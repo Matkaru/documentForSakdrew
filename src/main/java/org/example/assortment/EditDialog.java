@@ -1,7 +1,7 @@
 package org.example.assortment;
 import org.example.enums.Unit;
 import org.example.enums.Vat;
-import org.example.windowIcon.WindowIconSetter;
+import org.example.appConfig.WindowIconSetter;
 
 import javax.swing.*;
 import java.awt.*;

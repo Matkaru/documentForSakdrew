@@ -3,7 +3,7 @@ import org.example.startWindow.StartWindow;
 import org.example.enums.Unit;
 import org.example.enums.Vat;
 import org.example.startWindow.StartWindowButtonListener;
-import org.example.windowIcon.WindowIconSetter;
+import org.example.appConfig.WindowIconSetter;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -53,11 +53,16 @@ public class Assortment extends JFrame {
     }
 
     public Assortment() throws IOException {
+        super("Asortyment");
+        int widthScreen = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int heightScreen = Toolkit.getDefaultToolkit().getScreenSize().height;
+        int frameWidth = (widthScreen/2);
+        int frameHeight = (heightScreen/2);
+        this.setSize(frameWidth,frameHeight);
+        setLocationRelativeTo(null);
 
-
-        setTitle("Asortyment");
-        setSize(700, 800);
         WindowIconSetter.setWindowIcon(this,"src/main/resources/dfsc syst.png");
+        setLocationRelativeTo(null);
 
 
         String[] columnNames = {"Kod", "Nazwa", "Cena", "Jednostka", "VAT"};
@@ -162,10 +167,12 @@ public class Assortment extends JFrame {
         }
     });
 
-    AssortmentButtonListener assortmentButtonListener = new AssortmentButtonListener();
+        AssortmentButtonListener assortmentButtonListener = new AssortmentButtonListener();
         addButton.addActionListener(assortmentButtonListener);
         editButton.addActionListener(assortmentButtonListener);
         deleteButton.addActionListener(assortmentButtonListener);
 
+
 }
+
 }

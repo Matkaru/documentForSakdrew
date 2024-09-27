@@ -1,4 +1,4 @@
-package org.example.windowIcon;
+package org.example.appConfig;
 
 import org.example.assortment.EditDialog;
 import org.example.contractor.EditDialogFromContractor;

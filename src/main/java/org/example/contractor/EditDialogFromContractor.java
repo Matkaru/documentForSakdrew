@@ -1,5 +1,5 @@
 package org.example.contractor;
-import org.example.windowIcon.WindowIconSetter;
+import org.example.appConfig.WindowIconSetter;
 
 import javax.swing.*;
 import java.awt.*;
